@@ -3,19 +3,33 @@ import PokeCard from './PokeCard.js'
 import './PokeCarousel.css';
 
 
-const PokeCarousel = ({pokemonList}) => {
+const PokeCarousel = ({pokemonList, set_list_url}) => {
 
-	const pokeCards = pokemonList.map( (p, index) => {
-		return (
-			<PokeCard key={index} url={p.url}/>
-		)
-	});
-		
+	if (!pokemonList.results)
+		return null;
+
+	const handlePrevClick = () => { set_list_url(pokemonList.previous) };
+  	const handleNextClick = () => { set_list_url(pokemonList.next) };
+
+	const pokeCards = pokemonList.results.map( (p, index) =>
+		<PokeCard key={index} url={p.url}/>
+	);
+	
 
 	return (
-		<div className="PokeCarousel">
-			{pokeCards}
-		</div>
+		<>
+			<button 
+	    		onClick={pokemonList.previous? handlePrevClick : null}
+	    		disabled={pokemonList.previous? false: true }
+	    		>Previous</button>
+	    	<button
+	    		onClick={pokemonList.next? handleNextClick : null}
+	    		disabled={pokemonList.next? false: true }
+	    		>Next</button>
+			<div className="PokeCarousel">
+				{pokeCards}
+			</div>
+		</>
 	);
 
 

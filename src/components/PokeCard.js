@@ -21,7 +21,8 @@ const PokeCard = ({url}) => {
 			<h3>{pokemon.name}</h3>
 			
 			{/* it seems the the key "sprites" doesn't exist when the page first loads
-			so we need this check to avoid accessing it prematurely ?? */}
+			so we need this check to avoid accessing it prematurely ??? */}
+			
 			{pokemon.sprites? 
 				<img src={pokemon.sprites.front_default}/> :
 				null
